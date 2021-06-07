@@ -10,14 +10,27 @@ coordinator = Coordinator()
 @app.route('/')
 @app.route('/home')
 def retornaTesteHtml():
-    return "Servidor De Coordenadas Está Executando"
+    return '''Servidor De Coordenadas Está Executando\n
+               \n
+               Rotas: /distancia/endereco1/endereco2    => Distancia de em metros\n
+                      /informacao/endereco                => Informações disponiveis do endereço\n
+                '''
 
 @app.route('/distancia/<endereco1>/<endereco2>')
 def retornarDistancia(endereco1, endereco2):
     cord1 = coordinator.calcularCoordenadas( endereco1 )
     cord2 = coordinator.calcularCoordenadas( endereco2 )
+    if cord1 == None:
+        return "Endereço 1 não encontrado"
+
+    if cord2 == None:
+        return "Endereço 2 não encontrado"
 
     return str( coordinator.calcularDistancia( cord1, cord2 ) )
+
+@app.route('/informacao/<endereco>')
+def retornarInformacao(endereco):
+    return str( coordinator.retornarInformacaoEndereco( endereco ))
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port='7373')
