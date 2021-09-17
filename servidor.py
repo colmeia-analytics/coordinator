@@ -31,7 +31,7 @@ def retornarDistancia(endereco1, endereco2):
 
 @app.route('/informacao/<endereco>')
 def retornarInformacao(endereco):
-    return Response(json.loads(coordinator.retornarInformacaoEndereco( endereco )), content_type='application/json')
+    return Response(json.dumps(json.loads(coordinator.retornarInformacaoEndereco( endereco ))), content_type='application/json')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port='7373')
