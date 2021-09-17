@@ -30,7 +30,7 @@ def retornarDistancia(endereco1, endereco2):
 
 @app.route('/informacao/<endereco>')
 def retornarInformacao(endereco):
-    return Response(str( coordinator.retornarInformacaoEndereco( endereco )), content_type='text/xml; charset=utf-8')
+    return Response(str( coordinator.retornarInformacaoEndereco( endereco )), content_type='application/json')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port='7373')
