@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, Response
 from flask import send_file, redirect, send_from_directory
 from requests.models import cookiejar_from_dict
 from objetos.coordinator import Coordinator
@@ -30,7 +30,7 @@ def retornarDistancia(endereco1, endereco2):
 
 @app.route('/informacao/<endereco>')
 def retornarInformacao(endereco):
-    return str( coordinator.retornarInformacaoEndereco( endereco ))
+    return Response(str( coordinator.retornarInformacaoEndereco( endereco )), content_type='text/xml; charset=utf-8')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port='7373')
